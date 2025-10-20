@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/suivitens", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -23,9 +23,15 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api/measurements", measurementRoutes);
 app.get("/api/health", (req, res) => {
-  res.json({ message: "SuiviTens API is running", status: "OK" });
+  res.json({ message: "TensioTrack API is running", status: "OK" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Ne démarrer le serveur qu'en développement local
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+// Exporter l'app pour Vercel
+module.exports = app;
