@@ -32,7 +32,7 @@ router.post(
         password,
         firstName,
         lastName,
-        dateOfBirth: dateOfBirth || null,
+        dateOfBirth: dateOfBirth || null, 
       });
 
       await user.save();
@@ -40,7 +40,7 @@ router.post(
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
         expiresIn: "7d",
       });
-    
+
       res.status(201).json({
         message: "User created successfully",
         token,
