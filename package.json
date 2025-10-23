@@ -1,5 +1,5 @@
 {
-  "name": "suivitens-backend",
+  "name": "tensiotrack-backend",
   "version": "1.0.0",
   "description": "Backend API for blood pressure tracking application",
   "main": "server.js",
